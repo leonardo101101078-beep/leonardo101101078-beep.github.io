@@ -1,0 +1,66 @@
+export function Mascot({ size = 42 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 1000 1000"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="mascot-wrap"
+    >
+      <defs>
+        <linearGradient id="hamBody" x1="0" y1="250" x2="0" y2="770" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#FFE1C4" />
+          <stop offset="0.42" stopColor="#FFDFC0" />
+          <stop offset="0.5" stopColor="#FFF3E8" />
+          <stop offset="0.57" stopColor="#FFFFFF" />
+          <stop offset="1" stopColor="#FFFFFF" />
+        </linearGradient>
+      </defs>
+
+      {/* head + ears */}
+      <path
+        fill="url(#hamBody)"
+        stroke="#7E4451"
+        strokeWidth="22"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        d="M503 765 C 645 765 726 736 776 688 C 820 645 822 600 814 556 C 806 498 793 450 763 406 C 744 380 738 350 736 322 C 734 294 742 260 690 250 C 646 242 624 274 620 302 C 596 288 556 282 503 282 C 450 282 410 288 386 302 C 382 274 360 242 316 250 C 264 260 272 294 270 322 C 268 350 262 380 243 406 C 213 450 200 498 192 556 C 184 600 186 645 230 688 C 280 736 361 765 503 765 Z"
+      />
+
+      {/* eyes */}
+      <ellipse cx="405" cy="506" rx="63" ry="59" fill="#7E4451" />
+      <ellipse cx="599" cy="511" rx="58" ry="58" fill="#7E4451" />
+      <circle cx="386" cy="486" r="18" fill="#FFFFFF" />
+      <circle cx="420" cy="537" r="9.5" fill="#FFFFFF" />
+      <circle cx="582" cy="491" r="17" fill="#FFFFFF" />
+      <circle cx="615" cy="541" r="9" fill="#FFFFFF" />
+
+      {/* ω mouth/nose */}
+      <path
+        fill="none"
+        stroke="#7E4451"
+        strokeWidth="9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M470 514 C 477 502 489 502 495 514 C 500 524 506 524 511 514 C 517 502 529 502 536 514"
+      />
+
+      {/* smile curls */}
+      <path
+        fill="none"
+        stroke="#7E4451"
+        strokeWidth="12"
+        strokeLinecap="round"
+        d="M452 612 C 463 624 464 640 452 654 C 440 666 420 664 404 651"
+      />
+      <path
+        fill="none"
+        stroke="#7E4451"
+        strokeWidth="12"
+        strokeLinecap="round"
+        d="M554 612 C 543 624 542 640 554 654 C 566 666 586 664 602 651"
+      />
+    </svg>
+  );
+}

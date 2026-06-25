@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>囤囤鼠 — 設計方向預覽</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2b2b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"Noto Sans TC",sans-serif;
+    background:#ece8e3;
+    color:var(--ink);
+    padding:48px 24px 64px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page-head{max-width:1180px;margin:0 auto 40px;text-align:center;}
+  .page-head h1{font-size:30px;font-weight:900;letter-spacing:.5px;}
+  .page-head p{margin-top:10px;color:#6b6660;font-size:15px;}
+  .grid{
+    max-width:1180px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
+  }
+  @media(max-width:980px){.grid{grid-template-columns:1fr;max-width:380px;}}
+  .col{display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .label{text-align:center;}
+  .label .name{font-size:19px;font-weight:900;}
+  .label .kw{margin-top:6px;font-size:12.5px;color:#7a746d;letter-spacing:1px;}
+  .label .means{margin-top:8px;font-size:12.5px;color:#938c84;line-height:1.6;max-width:300px;}
+
+  /* phone frame */
+  .phone{
+    width:300px;height:600px;border-radius:38px;overflow:hidden;
+    position:relative;box-shadow:0 18px 40px rgba(0,0,0,.16);
+    border:9px solid #1c1c1e;background:#fff;
+  }
+  .screen{position:absolute;inset:0;display:flex;flex-direction:column;}
+  .statusbar{height:30px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 18px;font-size:11px;font-weight:700;flex-shrink:0;}
+  .appbody{flex:1;overflow:hidden;padding:14px 16px;display:flex;flex-direction:column;gap:12px;}
+  .topbar{display:flex;align-items:center;gap:10px;}
+  .mascot{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+  .apptitle{font-weight:900;font-size:17px;line-height:1;}
+  .appsub{font-size:10.5px;margin-top:3px;}
+  .cards{display:flex;flex-direction:column;gap:11px;margin-top:2px;}
+  .navbar{height:56px;flex-shrink:0;display:flex;border-top:1px solid rgba(0,0,0,.06);}
+  .nav-i{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:700;}
+  .dot{width:13px;height:13px;border-radius:50%;flex-shrink:0;}
+  .glyph{width:18px;height:18px;}
+
+  /* ---------- A : Cozy Calm ---------- */
+  .A .screen{background:#FBF6EF;}
+  .A .statusbar{color:#8a8178;}
+  .A .mascot{background:#F2E4D4;}
+  .A .apptitle{color:#5a5048;}
+  .A .appsub{color:#a89e92;}
+  .A .card{background:#fff;border-radius:22px;padding:15px 16px;
+    box-shadow:0 6px 16px rgba(150,130,110,.10);}
+  .A .c-top{display:flex;align-items:center;justify-content:space-between;}
+  .A .c-name{font-weight:700;font-size:15px;color:#544a42;}
+  .A .c-meta{font-size:11px;color:#b0a698;margin-top:5px;}
+  .A .light{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;
+    padding:5px 11px;border-radius:999px;}
+  .A .lg{background:#EAF1E8;color:#6f9270;} .A .lg .dot{background:#8FB996;}
+  .A .ly{background:#FaF0DE;color:#bb9450;} .A .ly .dot{background:#E8B86D;}
+  .A .lr{background:#F7E6E4;color:#bd7470;} .A .lr .dot{background:#D98C8C;}
+  .A .navbar{background:#FBF6EF;}
+  .A .nav-i{color:#c3b9ab;} .A .nav-i.on{color:#8FB996;}
+
+  /* ---------- B : Playful Toy ---------- */
+  .B .screen{background:#FFF7E8;}
+  .B .statusbar{color:#3a3530;}
+  .B .mascot{background:#FFD84D;border:2.5px solid #2b2b2b;font-size:18px;}
+  .B .apptitle{color:#2b2b2b;}
+  .B .appsub{color:#9a7b3a;font-weight:700;}
+  .B .card{background:#fff;border:2.5px solid #2b2b2b;border-radius:18px;padding:14px 15px;
+    box-shadow:4px 5px 0 #2b2b2b;}
+  .B .c-top{display:flex;align-items:center;justify-content:space-between;}
+  .B .c-name{font-weight:900;font-size:15px;color:#2b2b2b;}
+  .B .c-meta{font-size:11px;color:#8a8278;margin-top:5px;font-weight:500;}
+  .B .light{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:900;color:#2b2b2b;
+    padding:5px 10px;border-radius:999px;border:2px solid #2b2b2b;}
+  .B .lg{background:#5EE6A0;} .B .lg .dot{background:#1c1c1c;}
+  .B .ly{background:#FFC93C;} .B .ly .dot{background:#1c1c1c;}
+  .B .lr{background:#FF6B6B;color:#fff;} .B .lr .dot{background:#fff;}
+  .B .navbar{background:#fff;border-top:2.5px solid #2b2b2b;}
+  .B .nav-i{color:#bdb6a8;} .B .nav-i.on{color:#2b2b2b;}
+
+  /* ---------- C : Clean Utility ---------- */
+  .C .screen{background:#fff;}
+  .C .statusbar{color:#9b9b9b;}
+  .C .mascot{background:#F1F1F0;font-size:17px;}
+  .C .apptitle{color:#1c1c1e;font-size:18px;letter-spacing:-.3px;}
+  .C .appsub{color:#a0a0a0;}
+  .C .card{background:#fff;border:1px solid #ECECEC;border-radius:13px;padding:14px 15px;}
+  .C .c-top{display:flex;align-items:center;justify-content:space-between;}
+  .C .c-name{font-weight:600;font-size:15px;color:#1c1c1e;letter-spacing:-.2px;}
+  .C .c-meta{font-size:11px;color:#aeaeae;margin-top:4px;}
+  .C .light{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:#7a7a7a;}
+  .C .lg .dot{background:#34C759;} .C .ly .dot{background:#FF9F0A;} .C .lr .dot{background:#FF3B30;}
+  .C .lr{color:#FF3B30;font-weight:700;}
+  .C .navbar{background:#fff;}
+  .C .nav-i{color:#c4c4c4;} .C .nav-i.on{color:#1c1c1e;}
+
+  .badge{position:absolute;top:-9px;left:50%;transform:translateX(-50%);
+    background:#1c1c1e;color:#fff;font-size:10px;font-weight:700;padding:3px 12px;border-radius:999px;letter-spacing:1px;}
+  .phonewrap{position:relative;}
+  .note{font-size:11px;color:#a89f95;text-align:center;font-style:italic;}
+</style>
+</head>
+<body>
+  <div class="page-head">
+    <h1>囤囤鼠 🐹 — 三種設計方向</h1>
+    <p>同一個主頁,三種風格。看哪一種最對味,告訴我「A / B / C」或想混搭的點。</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- ============ A ============ -->
+    <div class="col A">
+      <div class="label">
+        <div class="name">A · 柔軟療癒</div>
+        <div class="kw">溫暖 · 圓潤 · 療癒</div>
+        <div class="means">奶油底色、柔和陰影、低飽和燈號。連紅燈都溫柔,是提醒不是警報。</div>
+      </div>
+      <div class="phonewrap">
+        <div class="phone">
+          <div class="screen">
+            <div class="statusbar"><span>9:41</span><span>●●● ⌁ ▢</span></div>
+            <div class="appbody">
+              <div class="topbar">
+                <div class="mascot">🐹</div>
+                <div><div class="apptitle">囤囤鼠</div><div class="appsub">家裡的補貨小窩</div></div>
+              </div>
+              <div class="cards">
+                <div class="card">
+                  <div class="c-top"><div class="c-name">衛生紙</div>
+                    <div class="light lg"><span class="dot"></span>充足</div></div>
+                  <div class="c-meta">還可以撐 18 天</div>
+                </div>
+                <div class="card">
+                  <div class="c-top"><div class="c-name">洗髮精</div>
+                    <div class="light ly"><span class="dot"></span>快了</div></div>
+                  <div class="c-meta">剩 8 天 · 一週內該下單</div>
+                </div>
+                <div class="card">
+                  <div class="c-top"><div class="c-name">貓砂</div>
+                    <div class="light lr"><span class="dot"></span>該買</div></div>
+                  <div class="c-meta">剩 2 天 · 再不下單會斷貨</div>
+                </div>
+              </div>
+            </div>
+            <div class="navbar">
+              <div class="nav-i on"><span class="glyph">🏠</span>主頁</div>
+              <div class="nav-i"><span class="glyph">🛒</span>採買清單</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="note">字體建議:粉圓體 / 圓潤黑體</div>
+    </div>
+
+    <!-- ============ B ============ -->
+    <div class="col B">
+      <div class="label">
+        <div class="name">B · 童趣玩具</div>
+        <div class="kw">活潑 · 童趣 · 繽紛</div>
+        <div class="means">粗黑描邊、硬陰影、鮮豔大色塊。燈號又大又明確,倉鼠是主角。</div>
+      </div>
+      <div class="phonewrap">
+        <div class="phone">
+          <div class="screen">
+            <div class="statusbar"><span>9:41</span><span>●●● ⌁ ▢</span></div>
+            <div class="appbody">
+              <div class="topbar">
+                <div class="mascot">🐹</div>
+                <div><div class="apptitle">囤囤鼠</div><div class="appsub">該囤貨啦!</div></div>
+              </div>
+              <div class="cards">
+                <div class="card">
+                  <div class="c-top"><div class="c-name">衛生紙</div>
+                    <div class="light lg"><span class="dot"></span>充足</div></div>
+                  <div class="c-meta">還能撐 18 天</div>
+                </div>
+                <div class="card">
+                  <div class="c-top"><div class="c-name">洗髮精</div>
+                    <div class="light ly"><span class="dot"></span>快了</div></div>
+                  <div class="c-meta">剩 8 天 · 一週內下單</div>
+                </div>
+                <div class="card">
+                  <div class="c-top"><div class="c-name">貓砂</div>
+                    <div class="light lr"><span class="dot"></span>該買</div></div>
+                  <div class="c-meta">剩 2 天 · 快斷貨!</div>
+                </div>
+              </div>
+            </div>
+            <div class="navbar">
+              <div class="nav-i on"><span class="glyph">🏠</span>主頁</div>
+              <div class="nav-i"><span class="glyph">🛒</span>採買清單</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="note">字體建議:粗體圓黑 + 描邊</div>
+    </div>
+
+    <!-- ============ C ============ -->
+    <div class="col C">
+      <div class="label">
+        <div class="name">C · 清爽工具</div>
+        <div class="kw">簡潔 · 俐落 · 效率</div>
+        <div class="means">大量留白、細線、單一強調色。燈號是精準小圓點,資訊密度高。</div>
+      </div>
+      <div class="phonewrap">
+        <div class="phone">
+          <div class="screen">
+            <div class="statusbar"><span>9:41</span><span>●●● ⌁ ▢</span></div>
+            <div class="appbody">
+              <div class="topbar">
+                <div class="mascot">🐹</div>
+                <div><div class="apptitle">囤囤鼠</div><div class="appsub">3 項物資 · 1 項待採買</div></div>
+              </div>
+              <div class="cards">
+                <div class="card">
+                  <div class="c-top"><div class="c-name">衛生紙</div>
+                    <div class="light lg"><span class="dot"></span>18 天</div></div>
+                  <div class="c-meta">週期 28 天 · 送貨 3 天</div>
+                </div>
+                <div class="card">
+                  <div class="c-top"><div class="c-name">洗髮精</div>
+                    <div class="light ly"><span class="dot"></span>8 天</div></div>
+                  <div class="c-meta">週期 30 天 · 送貨 2 天</div>
+                </div>
+                <div class="card">
+                  <div class="c-top"><div class="c-name">貓砂</div>
+                    <div class="light lr"><span class="dot"></span>該買</div></div>
+                  <div class="c-meta">週期 21 天 · 送貨 2 天</div>
+                </div>
+              </div>
+            </div>
+            <div class="navbar">
+              <div class="nav-i on"><span class="glyph">▦</span>主頁</div>
+              <div class="nav-i"><span class="glyph">☰</span>採買清單</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="note">字體建議:Noto Sans TC 細／中黑</div>
+    </div>
+
+  </div>
+</body>
+</html>
