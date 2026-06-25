@@ -17,7 +17,9 @@ export default defineConfig({
         background_color: '#FFF7E8',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/',
+        start_url: '/hamstock/',
+        scope: '/hamstock/',
+        lang: 'zh-Hant',
         icons: [
           {
             src: 'icons/icon-192.png',
